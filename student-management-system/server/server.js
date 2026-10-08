@@ -1,12 +1,17 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const authRoutes = require('./routes/authRoutes');
+const studentRoutes = require('./routes/studentRoutes');
 
 const app = express();
 const db = require('./models'); 
 
 app.use(cors()); 
 app.use(express.json()); 
+
+app.use('/api/auth', authRoutes);
+app.use('/api/student', studentRoutes);
 
 
 db.sequelize.authenticate()
