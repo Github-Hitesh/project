@@ -13,8 +13,12 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: 'All fields are strictly required.' });
     }
 
-    if (password.length < 8) {
-      return res.status(400).json({ message: 'Password must contain at least 8 characters.' });
+    if (username.length < 4 || username.length > 25) {
+      return res.status(400).json({ message: 'username must contain 4 to 25 characters.' });
+    }
+
+    if (password.length < 8 || password.length > 20) {
+      return res.status(400).json({ message: 'Password must contain 8 to 20 characters.' });
     }
 
     const existingUser = await User.findOne({ where: { email } });
